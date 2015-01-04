@@ -7,7 +7,7 @@
     </title>
     <meta name="description" content="The world's premiere horse simulation experience.">
     {{ HTML::script('js/vendor.js'); }}
-    {{ HTML::script('js/cram.js'); }}
+    {{ HTML::script('js/horse.js'); }}
     {{ HTML::style('css/style.css'); }}
 </head>
 <body>

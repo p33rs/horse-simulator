@@ -9,7 +9,6 @@
     "main": "index.php",
     "dependencies": {
         "jquery": "git://github.com/jquery/jquery.git",
-        "events": "git://github.com/p33rs/events.git",
         "backbone-amd": "latest",
         "underscore-amd": "latest"
     },
