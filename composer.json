@@ -17,7 +17,7 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/validators",
+			"app/validators"
 		]
 	},
 	"scripts": {
