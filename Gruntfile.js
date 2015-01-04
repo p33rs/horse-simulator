@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                 dest: 'public/js/vendor.js'
             },
             dist: {
-                src: 'js/**/*.js',
+                src: 'js/src/**/*.js',
                 dest: 'public/js/horse.js'
             },
             css: {
@@ -31,6 +31,18 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     '<%= concat.dist.dest %>': ['<%= concat.dist.dest %>']
+                }
+            }
+        },
+        jst: {
+            compile: {
+                options: {
+                    processName: function(filepath) {
+                        return filepath.substr(13, filepath.length-17);
+                    }
+                },
+                files: {
+                    'public/js/templates.js': ['js/templates/**/*.tpl']
                 }
             }
         },
@@ -51,7 +63,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-jst');
 
-    grunt.registerTask('default', ['less', 'concat', 'uglify', 'watch']);
+    grunt.registerTask('default', ['less', 'concat', 'jst', 'uglify', 'watch']);
 
 };
