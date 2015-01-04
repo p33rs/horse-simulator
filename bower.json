@@ -1,0 +1,22 @@
+{
+    "name": "peers/horse-simulator",
+    "version": "0.0.0",
+    "homepage": "http://peers.pw",
+    "authors": [
+        "p33rs <jon@peers.pw>"
+    ],
+    "description": "Horse Simulator Bitch",
+    "main": "index.php",
+    "dependencies": {
+        "jquery": "git://github.com/jquery/jquery.git",
+        "events": "git://github.com/p33rs/events.git",
+        "backbone-amd": "latest",
+        "underscore-amd": "latest"
+    },
+    "ignore": [
+        "vendor/**/*",
+        "node_modules",
+        "**/.*",
+        "!.gitignore"
+    ]
+}

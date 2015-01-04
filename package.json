@@ -1,0 +1,23 @@
+{
+    "name": "peers-horse_simulator",
+    "version": "0.0.0",
+    "description": "HORSE",
+    "main": "index.php",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/p33rs/horsesim.git"
+    },
+    "author": "p33rs",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/p33rs/horsesim/issues"
+    },
+    "devDependencies" : {
+        "grunt": "^0.4.5",
+        "grunt-cli": "^0.1.13",
+        "grunt-contrib-concat": "^0.4.0",
+        "grunt-contrib-uglify": "^0.4.0",
+        "grunt-contrib-watch": "^0.6.1",
+        "grunt-contrib-less": "^0.12.0"
+    }
+}
