@@ -15,7 +15,12 @@ module.exports = function(grunt) {
                 dest: 'public/js/vendor.js'
             },
             dist: {
-                src: 'js/src/**/*.js',
+                src: [
+                    'js/src/namespace.js',
+                    'js/src/model/*.js',
+                    'js/src/collection/*.js',
+                    'js/src/**/*.js'
+                ],
                 dest: 'public/js/horse.js'
             },
             css: {
@@ -49,13 +54,13 @@ module.exports = function(grunt) {
         less: {
             development: {
                 files: {
-                    "css/vendor/bootstrap.css": "bower_components/bootstrap/less/bootstrap.less"
+                    // "css/vendor/bootstrap.css": "bower_components/bootstrap/less/bootstrap.less"
                 }
             }
         },
         watch: {
             files: ['<%= concat.vendor.src %>', '<%= concat.dist.src %>'],
-            tasks: ['concat', 'uglify']
+            tasks: ['concat', 'jst', 'uglify']
         }
     });
 
