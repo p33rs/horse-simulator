@@ -1,6 +1,7 @@
 <?php
 
 use horse\response\JsonResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class UserController extends BaseController {
 
     public function create()
@@ -23,64 +24,49 @@ class UserController extends BaseController {
 
     public function index()
     {
-        return JsonResponse::success(Horse::all());
+        return JsonResponse::success(User::all());
     }
 
     public function view($id)
     {
         try {
-            $horse = Horse::findOrFail($id);
-        } catch (\ModelNotFoundException $e) {
-            return JsonResponse::error('Horse not found', 404);
+            $user = User::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return JsonResponse::error('User not found', 404);
         }
-        return JsonResponse::success($horse);
+        return JsonResponse::success($user);
     }
 
     public function delete($id)
     {
         try {
-            $horse = Horse::findOrFail($id);
-        } catch (\ModelNotFoundException $e) {
-            return JsonResponse::error('Horse not found', 404);
+            $user = User::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return JsonResponse::error('User not found', 404);
         }
-        $horse->delete();
+        $user->delete();
         return JsonResponse::success();
     }
 
     public function update($id)
     {
-        $user = Auth::user();
-        if (!Request::isMethod('post')) {
-            return View::make('user/account')->with('user', $user);
-        }
-        $data = Input::all();
-        /** @var cram\validators\ValidatorLocator $validators */
-        $validators = App::make('cram\Validation');
-        /** @var cram\validators\SignupValidator $validator */
-        $errors = $validators->get('Account', $data, ['id' => $user->id])->errors();
-        $user->email = Input::get('email');
-        $user->firstname = Input::get('firstname');
-        $user->lastname = Input::get('lastname');
-        if (Input::get('password')) {
-            $user->password = Hash::make($data['password']);
-        }
-        if (!$errors->count()) {
-            $user->save();
-            Session::set('message', 'Account updated');
-        }
-        return View::make('user/account')
-            ->with('user', $user)
-            ->with('errors', $errors);
-    }
-
-    public function like($id)
-    {
         try {
-            $horse = Horse::findOrFail($id);
-        } catch (\ModelNotFoundException $e) {
-            return JsonResponse::error('Horse not found', 404);
+            $user = User::findOrFail($id)->fill(Input::all());
+        } catch (ModelNotFoundException $e) {
+            return JsonResponse::error('User not found', 404);
         }
-        $horse->increment('likes');
+        /** @var horse\validators\ValidatorLocator $validators */
+        $validators = App::make('user\Validation');
+        /** @var horse\validators\UserValidator $validator */
+        $errors = $validators->get('User', $user->toArray())->errors();
+
+        if ($errors->count()) {
+            return JsonResponse::validation($errors);
+        }
+        if (Input::get('password')) {
+            $user->password = Hash::make(Input::get('password'));
+        }
+        $user->save();
         return JsonResponse::success();
     }
 

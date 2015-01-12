@@ -1,6 +1,7 @@
 <?php
 
 use horse\response\JsonResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class HorseController extends BaseController {
 
     public function create()
@@ -17,22 +18,28 @@ class HorseController extends BaseController {
         return JsonResponse::success(
             Horse::create([
                 'name' => Input::get('name'),
-                'occupation' => Input::get('occpuation')?:'',
+                'occupation' => Input::get('occupation')?:'',
                 'bio' => Input::get('bio')?:'',
+                'user_id' => Auth::id(),
             ])
         );
     }
 
     public function index()
     {
-        return JsonResponse::success(Horse::all());
+        $horse = Horse::with('user');
+        if (Input::has('user_id')) {
+            return $horse->where('user_id', '=', Input::get('user_id'))->get();
+        } else {
+            return JsonResponse::success($horse->get());
+        }
     }
 
     public function view($id)
     {
         try {
-            $horse = Horse::findOrFail($id);
-        } catch (\ModelNotFoundException $e) {
+            $horse = Horse::with('user')->findOrFail($id);
+        } catch (ModelNotFoundException $e) {
             return JsonResponse::error('Horse not found', 404);
         }
         return JsonResponse::success($horse);
@@ -42,7 +49,7 @@ class HorseController extends BaseController {
     {
         try {
             $horse = Horse::findOrFail($id);
-        } catch (\ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return JsonResponse::error('Horse not found', 404);
         }
         $horse->delete();
@@ -53,7 +60,7 @@ class HorseController extends BaseController {
     {
         try {
             $horse = Horse::findOrFail($id)->fill(Input::all());
-        } catch (\ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return JsonResponse::error('Horse not found', 404);
         }
         /** @var horse\validators\ValidatorLocator $validators */
@@ -72,7 +79,7 @@ class HorseController extends BaseController {
     {
         try {
             $horse = Horse::findOrFail($id);
-        } catch (\ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             return JsonResponse::error('Horse not found', 404);
         }
         $horse->increment('likes');
