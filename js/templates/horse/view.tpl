@@ -5,9 +5,27 @@
     <h3 class="horse_details-occupation">
         <%- horse.get('occupation') %>
     </h3>
-    <aside class="horse_details-likes">
+    <p class="horse_details-owner">
+        Owned by
+        <span class="horse_details-owner-name">
+            <%- horse.get('user').username %>
+        </span>
+    </p>
+    <p class="horse_details-chilling">
+        This horse
+        <span class="horse_details-chilling-status">
+            <%- horse.get('chilling') ? 'is' : 'is not' %>
+        </span>
+        chilling right now.
+    </p>
+    <p class="horse_details-likes">
+        This horse has been liked
         <span class="horse_details-likes_count">
             <%- horse.get('likes') %>
         </span>
-    </aside>
+        times.
+    </p>
+    <p class="horse_details-back">
+        Return to the Horse List.
+    </p>
 </article>

@@ -11,17 +11,17 @@
             </tr>
         </thead>
         <tbody>
-        <% for (var i = 0; i < horses.length; i++) { %>
-            <tr>
+        <% horses.each(function(horse) { %>
+            <tr data-id="<%- horse.get('id') %>" class="horse_list-item">
                 <td class="horse_list-name">
-                    <span class="horse_list-link"><%- horses[i].name %></span>
+                    <span class="horse_list-link"><%- horse.get('name') %></span>
                 </td>
-                <td class="horse_list-owner"><%- horses[i].user.owner %></td>
-                <td class="horse_list-occupation"><%- horses[i].occupation %></td>
-                <td class="horse_list-chilling"><%- horses[i].chilling ? 'Frig Yes' : 'Aw No' %></td>
-                <td class="horse_list-likes"><%- horses[i].likes %></td>
+                <td class="horse_list-owner"><%- horse.get('user').username %></td>
+                <td class="horse_list-occupation"><%- horse.get('occupation') %></td>
+                <td class="horse_list-chilling"><%- horse.get('chilling') ? 'Frig Yes' : 'Aw No' %></td>
+                <td class="horse_list-likes"><%- horse.get('likes') %></td>
             </tr>
-        <% } %>
+        <% }); %>
         </tbody>
     </table>
 </section>

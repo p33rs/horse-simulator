@@ -7,13 +7,7 @@
     </title>
     <meta name="description" content="The world's premiere horse simulation experience.">
     <script type="text/javascript">
-        @if(Auth::check())
-            var INIT_USER = {{{ json_encode(Auth::user()) }}};
-            var INIT_HORSES = {{ json_encode(Horse::with('user')->get()) }};
-        @else
-            var INIT_USER = null;
-            var INIT_HORSES = null;
-        @endif
+        var INIT_HORSES = {{ json_encode(Horse::with('user')->get()) }};
     </script>
     {{ HTML::script('js/vendor.js'); }}
     {{ HTML::script('js/templates.js'); }}
@@ -26,9 +20,6 @@
             Horse Simulator
             <span class="logo-year">2015</span>
             <span class="logo-beta">(beta)</span>
-        </span>
-        <span class="logout">
-            <span class="logout">Log Out</span>
         </span>
     </section>
     <section id="content">

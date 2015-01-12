@@ -8,7 +8,7 @@ HorseSimulator.Model.Horse = Backbone.Model.extend({
         user_id: 0,
         user: {}
     },
-    parse: function(resp, opt) {
+    parse: function(resp) {
         // if the data has already been pulled out of
         var data = resp.success ? resp.data : resp;
         var ints = ['id', 'user_id', 'likes'];
@@ -17,6 +17,7 @@ HorseSimulator.Model.Horse = Backbone.Model.extend({
                 data[ints[i]] = parseInt(data[ints[i]], 10);
             }
         }
+        data.chilling = data.chilling === '1';
         return data;
     },
     like: function() {
