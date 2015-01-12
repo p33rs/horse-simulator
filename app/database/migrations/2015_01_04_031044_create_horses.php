@@ -18,8 +18,11 @@ class CreateHorses extends Migration {
             $table->timestamps();
             $table->string('name');
             $table->string('occupation');
+            $table->boolean('chilling');
             $table->text('bio');
             $table->integer('likes')->unsigned()->default(0);
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 	}
 
