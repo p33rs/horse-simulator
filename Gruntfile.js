@@ -59,8 +59,20 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['<%= concat.vendor.src %>', '<%= concat.dist.src %>'],
-            tasks: ['concat', 'jst', 'uglify']
+            src: {
+                files: [
+                    '<%= concat.vendor.src %>',
+                    '<%= concat.dist.src %>'
+                ],
+                tasks: ['concat', 'uglify']
+            },
+            tpl: {
+                files: 'js/templates/**/*.tpl',
+                tasks: 'jst'
+            },
+            gruntfile: {
+                files: 'Gruntfile.js'
+            }
         }
     });
 
