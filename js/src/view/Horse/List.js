@@ -1,7 +1,7 @@
 HorseSimulator.View.HorseList = Backbone.View.extend({
     template: JST['horse/list'],
     initialize: function() {
-        this.listenTo(this.collection, change, this.render.bind(this));
+        this.listenTo(this.collection, 'change', this.render.bind(this));
     },
     render: function() {
         $(this.template({ horses: this.collection })).appendTo(this.$el.empty());
