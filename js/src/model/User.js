@@ -1,4 +1,4 @@
-HorseSimulator.Model.Horse = Backbone.Model.extend({
+HorseSimulator.Model.User = Backbone.Model.extend({
     defaults: {
         id: 0,
         username: '',
