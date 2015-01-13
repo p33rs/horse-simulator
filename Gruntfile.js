@@ -22,10 +22,6 @@ module.exports = function(grunt) {
                     'js/src/**/*.js'
                 ],
                 dest: 'public/js/horse.js'
-            },
-            css: {
-                src: 'css/**/*.css',
-                dest: 'public/css/style.css'
             }
         },
         uglify: {
