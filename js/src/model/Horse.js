@@ -8,6 +8,9 @@ HorseSimulator.Model.Horse = Backbone.Model.extend({
         user_id: 0,
         user: {}
     },
+    initialize: function() {
+        _.bindAll(this, 'like');
+    },
     parse: function(resp) {
         // if the data has already been pulled out of
         var data = resp.success ? resp.data : resp;
@@ -20,12 +23,18 @@ HorseSimulator.Model.Horse = Backbone.Model.extend({
         data.chilling = data.chilling === '1';
         return data;
     },
+    /**
+     * Illustrate behavior of non-RESTy calls.
+     * Here we update #likes and trigger sync event. We don't use .set()
+     *   because we don't want to put the model in "changed" state.
+     */
     like: function() {
         $.ajax({
             url: this.url() + '/like',
             type: 'PUT',
-            success: (function () {
-                this.set('likes', this.get('likes') + 1);
+            success: (function (resp) {
+                this.attributes.likes = this.get('likes') + 1;
+                this.trigger('sync', this, resp);
             }).bind(this)
         });
     }
