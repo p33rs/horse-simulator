@@ -4,6 +4,7 @@ HorseSimulator.View.HorseView = Backbone.View.extend({
         'click .horse_details-like_this_shit_yo': 'likeHorse'
     },
     initialize: function() {
+        _.bindAll(this, 'render', 'likeHorse');
         this.listenTo(this.model, 'sync', this.render.bind(this));
     },
     render: function() {
