@@ -1,13 +1,12 @@
 HorseSimulator.View.HorseList = Backbone.View.extend({
     template: JST['horse/list'],
     initialize: function() {
-        this.collection.on('change', this.render.bind(this));
+        this.listenTo(this.collection, change, this.render.bind(this));
     },
     render: function() {
         $(this.template({ horses: this.collection })).appendTo(this.$el.empty());
         this.$el.on('click', '.horse_list-link', function() {
             var id = $(this).closest('.horse_list-item').data('id');
-            console.log('s');
             ROUTER.navigate('view/' + id.toString(), {trigger: true});
         });
         return this;
