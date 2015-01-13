@@ -25,8 +25,8 @@
         </span>
         times.
         <span class="horse_details-like_this_shit_yo">
-            Like this horse
-        </span>!
+            Like this horse<!--
+        --></span>!
     </p>
     <p class="horse_details-back">
         Return to the Horse List.

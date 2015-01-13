@@ -13,3 +13,4 @@ css/bootstrap.css
 node_modules
 bower_components
 uploads
+.sass-cache

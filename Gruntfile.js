@@ -51,11 +51,9 @@ module.exports = function(grunt) {
                 }
             }
         },
-        less: {
-            development: {
-                files: {
-                    // "css/vendor/bootstrap.css": "bower_components/bootstrap/less/bootstrap.less"
-                }
+        sass: {
+            dist: {
+                files: { 'public/css/style.css' : 'css/index.scss' }
             }
         },
         watch: {
@@ -70,6 +68,10 @@ module.exports = function(grunt) {
                 files: 'js/templates/**/*.tpl',
                 tasks: 'jst'
             },
+            sass: {
+                files: 'css/**/*',
+                tasks: 'sass'
+            },
             gruntfile: {
                 files: 'Gruntfile.js'
             }
@@ -79,9 +81,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-jst');
 
-    grunt.registerTask('default', ['less', 'concat', 'jst', 'uglify', 'watch']);
+    grunt.registerTask('default', ['sass', 'concat', 'jst', 'uglify', 'watch']);
 
 };
