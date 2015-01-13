@@ -1,4 +1,13 @@
 .horse_list {
+
+    margin: 1em auto;
+    width: 80%;
+    max-width: 1024px;
+
+    .horse_list-wrapper {
+        width: 100%;
+    }
+
     .horse_list-link {
         color: #0040a0;
         cursor: pointer;

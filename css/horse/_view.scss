@@ -1,8 +1,16 @@
 .horse_details {
-    .horse_details-likes_count {
+    width: 33%;
+    max-width: 600px;
+
+    .horse_details-likes_count,
+    .horse_details-owner-name,
+    .horse_details-chilling-status
+    {
         font-weight: bold;
     }
-    .horse_details-like_this_shit_yo {
+
+    .horse_details-like_this_shit_yo,
+    .horse_details-back {
         color: #0040a0;
         cursor: pointer;
     }
